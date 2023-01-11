@@ -35,7 +35,7 @@ jobs:
             --recursive \
             --region us-east-1 \
             --acl public-read \
-            dist/frontend s3://metaradar.io
+            dist/metaradar s3://metaradar.io
 
       #- name: Deploy Cloudfront
       #  env:
