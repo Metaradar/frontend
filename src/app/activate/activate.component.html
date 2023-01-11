@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row" *ngIf="loading">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading==false">
+        <ngb-alert [type]="!success?'danger':'success'" [dismissible]="false">{{ message }}</ngb-alert>
+       
+    </div>
+</div>

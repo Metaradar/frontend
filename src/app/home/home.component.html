@@ -1,0 +1,57 @@
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 fw-normal">Track Blockchain Addresses</h1>
+        <p class="lead fw-normal">You can track any Ethereum or Polygon address and get real-time email notifications.
+        </p>
+        <div class="row" *ngIf="loading==true && sent==false">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="row" *ngIf="loading==false && sent==true">
+            <ngb-alert [type]="error?'danger':'success'" [dismissible]="false">{{ message }}</ngb-alert>
+        </div>
+
+        <div class="row" *ngIf="loading==false && sent==false">
+            <ngb-alert *ngIf="error" [type]="error?'danger':'success'" [dismissible]="false">{{ message }}</ngb-alert>
+       
+            <div class="col-12 col-sm-4">
+                <input placeholder="ETH or Polygon Address like 0x000000" [(ngModel)]="address" type="text" />
+            </div>
+            <div class="col-12 col-sm-4">
+                <input placeholder="Email" [(ngModel)]="email" type="email" />
+            </div>
+            <div class="col-12 col-sm-4">
+                <select class="form-select" [(ngModel)]="network">
+                    <option [value]="'ethereum'">Ethereum</option>
+                    <option [value]="'polygon'">Polygon</option>
+                    </select>
+            </div>
+        </div>
+        <div class="row" *ngIf="loading==false && sent==false">
+            <div class="col-12">
+                <button class="btn btn-large btn-primary" (click)="signup()">Get Nofications!</button>
+                <br />
+                <span class="small">
+                    We will only inform you about the following events:
+                    <ul>
+                        <li>Token transfers (ERC20, ERC721, ERC1155)</li>
+                        <li>MATIC or ETH Transfers</li>
+                    </ul>
+                    In short: This should cover most relevant activity.<br />
+                    <strong>Your email will never be shared or misused.</strong>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Fun Facts</h1>
+            Monitored Addresses: {{addresses}}<br />
+            Ethereum: {{ethAddresses}}<br />
+            Polygon: {{polygonAddresses}}
+        </div>
+    </div>
+</div>

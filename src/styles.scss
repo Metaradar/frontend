@@ -2,3 +2,9 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/reboot";
+
+a {
+    color:black;
+    text-decoration: none;
+}
