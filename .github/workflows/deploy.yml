@@ -37,10 +37,10 @@ jobs:
             --acl public-read \
             dist/metaradar s3://metaradar.io
 
-      #- name: Deploy Cloudfront
-      #  env:
-      #    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ID }}
-      #    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-      #  run: aws cloudfront create-invalidation --distribution-id E278T2AO4LEM6J --paths "/*" --region us-east-1
+      - name: Deploy Cloudfront
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        run: aws cloudfront create-invalidation --distribution-id E2H7E61IHEUKLB --paths "/*" --region us-east-1
 
 
