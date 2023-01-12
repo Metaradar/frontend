@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   public addresses = 0;
   public ethAddresses = 0;
   public polygonAddresses = 0;
+  public sentNotifications = 0;
   public messages:any[] = [];
   public entries = [
     {
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<any>('https://api.metaradar.io/v1/stats').subscribe(r => {
-      for (const d of r) {
+      for (const d of r.addresses) {
         if (d.network == "ethereum") {
           this.ethAddresses = d.count;
         }
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
           this.polygonAddresses = d.count;
         }
       }
+      this.sentNotifications = r.notifications;
       this.addresses = this.ethAddresses + this.polygonAddresses;
     })
   }
