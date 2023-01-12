@@ -3,32 +3,43 @@
         <h1 class="display-4 fw-normal">Track Blockchain Addresses</h1>
         <p class="lead fw-normal">You can track any Ethereum or Polygon address and get real-time email notifications.
         </p>
-        <div class="row" *ngIf="loading==true && sent==false">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+        <ng-container *ngFor="let m of messages">
+            <ngb-alert [type]="m.error?'danger':'success'" [dismissible]="false">{{ m.message
+                }}</ngb-alert>
+
+        </ng-container>
+        <ng-container *ngFor="let e of entries">
+            <div class="row">
+                <div class="col-12">
+                <div class="spinner-border" role="status" *ngIf="e.loading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
-        </div>
-        <div class="row" *ngIf="loading==false && sent==true">
-            <ngb-alert [type]="error?'danger':'success'" [dismissible]="false">{{ message }}</ngb-alert>
+                <ngb-alert *ngIf="e.error" [type]="e.error?'danger':'success'" [dismissible]="false">{{ e.message
+                    }}</ngb-alert>
+
+                <div class="col-12 col-sm-4">
+                    <input [disabled]="e.loading" placeholder="ETH or Polygon Address like 0x000000" [(ngModel)]="e.address" type="text" />
+                </div>
+                <div class="col-12 col-sm-4">
+                    <input [disabled]="e.loading" placeholder="Email" [(ngModel)]="e.email" type="email" />
+                </div>
+                <div class="col-12 col-sm-4">
+                    <select [disabled]="e.loading" class="form-select" [(ngModel)]="e.network">
+                        <option [value]="'ethereum'">Ethereum</option>
+                        <option [value]="'polygon'">Polygon</option>
+                    </select>
+                </div>
+            </div>
+        </ng-container>
+        <div class="row">
+            <div class="col-12" (click)="add()" style="font-size:30px;font-weight:bold;cursor:pointer;">
+                +
+            </div>
         </div>
 
-        <div class="row" *ngIf="loading==false && sent==false">
-            <ngb-alert *ngIf="error" [type]="error?'danger':'success'" [dismissible]="false">{{ message }}</ngb-alert>
-       
-            <div class="col-12 col-sm-4">
-                <input placeholder="ETH or Polygon Address like 0x000000" [(ngModel)]="address" type="text" />
-            </div>
-            <div class="col-12 col-sm-4">
-                <input placeholder="Email" [(ngModel)]="email" type="email" />
-            </div>
-            <div class="col-12 col-sm-4">
-                <select class="form-select" [(ngModel)]="network">
-                    <option [value]="'ethereum'">Ethereum</option>
-                    <option [value]="'polygon'">Polygon</option>
-                    </select>
-            </div>
-        </div>
-        <div class="row" *ngIf="loading==false && sent==false">
+
+        <div class="row">
             <div class="col-12">
                 <button class="btn btn-large btn-primary" (click)="signup()">Get Nofications!</button>
                 <br />
