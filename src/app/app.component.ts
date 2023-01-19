@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 declare const gtag: Function;
+declare const logBadgeClick: Function;
+declare const window: any;
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,12 @@ export class AppComponent implements OnInit {
         page_path: e.urlAfterRedirects
       })
     })
+  }
+  ngAfterViewInit() {
+    
+  }
+  click() {
+      window.logBadgeClick();
   }
   title = 'metaradar';
 
