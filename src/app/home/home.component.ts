@@ -10,6 +10,8 @@ export class HomeComponent implements OnInit {
   public addresses = 0;
   public ethAddresses = 0;
   public polygonAddresses = 0;
+  public optimismAddresses = 0;
+  public arbitrumAddresses = 0;
   public sentNotifications = 0;
   public messages:any[] = [];
   public entries = [
@@ -36,6 +38,12 @@ export class HomeComponent implements OnInit {
         }
         else if (d.network == "polygon") {
           this.polygonAddresses = d.count;
+        }
+        else if (d.network == "optimism") {
+          this.optimismAddresses = d.count;
+        }
+        else if (d.network == "arbitrum") {
+          this.arbitrumAddresses = d.count;
         }
       }
       this.sentNotifications = r.notifications;
